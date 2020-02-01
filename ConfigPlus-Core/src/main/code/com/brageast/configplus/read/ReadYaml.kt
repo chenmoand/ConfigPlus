@@ -1,8 +1,10 @@
 package com.brageast.configplus.read
 
 import com.esotericsoftware.yamlbeans.YamlReader
+import com.esotericsoftware.yamlbeans.YamlWriter
 import org.yaml.snakeyaml.Yaml
 import java.io.InputStream
+import java.io.OutputStream
 
 object ReadYaml {
 
@@ -17,6 +19,12 @@ object ReadYaml {
         override fun <E> read(inputStream: InputStream, beanClass: Class<E>): E {
             val reader = YamlReader(inputStream.reader())
             return reader.read(beanClass) ?: throw IllegalAccessException("Can't load this inputStream")
+        }
+
+        override fun wirte(outputStream: OutputStream, entity: Any) {
+            val yamlWriter = YamlWriter(outputStream.bufferedWriter())
+            yamlWriter.write(entity)
+            yamlWriter.close()
         }
 
         inline fun <reified E> readToBean(inputStream: InputStream): E {
@@ -39,6 +47,10 @@ object ReadYaml {
         override fun <E> read(inputStream: InputStream, beanClass: Class<E>): E {
             return ymal.loadAs(inputStream, beanClass)
                     ?: throw IllegalAccessException("Can't load this inputStream")
+        }
+
+        override fun wirte(outputStream: OutputStream, entity: Any) {
+            ymal.dump(entity, outputStream.bufferedWriter())
         }
 
     }

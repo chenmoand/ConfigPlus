@@ -45,8 +45,8 @@ fun getPluginBeans() = pluginJarFiles.run {
 }
 
 /**
- * 得到使用此方法得Plugin 得main class name
- * 魔法方法,
+ * 得到使用此方法得Plugin 得main className
+ * 魔法方法, 爽爽就完事了
  */
 @Throws(ClassNotFoundException::class)
 fun getUsePluginClassName(): String {

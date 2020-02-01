@@ -3,6 +3,7 @@ package com.brageast.configplus.read
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import java.io.InputStream
+import java.io.OutputStream
 
 object ReadJson : ReadConfig {
 
@@ -16,6 +17,12 @@ object ReadJson : ReadConfig {
     override fun <E> read(inputStream: InputStream, beanClass: Class<E>): E {
         return gson.fromJson(inputStream.reader(), beanClass)
                 ?: throw IllegalAccessException("Can't load this inputStream to beanClass")
+    }
+
+    override fun wirte(outputStream: OutputStream, entity: Any) {
+        val json = gson.toJson(entity)
+        outputStream.write(json.toByteArray())
+        outputStream.close()
     }
 
 }

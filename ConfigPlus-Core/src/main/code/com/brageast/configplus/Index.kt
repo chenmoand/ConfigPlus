@@ -10,21 +10,20 @@ import org.bukkit.plugin.java.JavaPlugin
 class Index : JavaPlugin() {
 
     override fun onEnable() {
-        // 获得Bean
-        val config = ConfigFile().create(ConfigBean::class.java)
 
-        if(config.isEnableDownloadLib.toBoolean()) {
-            // 下载前置
-            DownloadLib.run()
-        } else {
-            logger.info("以关闭自动下载前置功能")
-        }
+        DownloadLib.run()
 
         //将jar加入到ClassLoader
         LibraryLoaderUtil.addLibraryOnClassLoader()
+        // 获得Bean
+        val config = ConfigFile().create(ConfigBean::class.java)
 
-
-        logger.info(getPluginBeans().toString())
+        println(config)
+        /*if(config.isEnableDownloadLib.toBoolean()) {
+            // 下载前置
+        } else {
+            logger.info("以关闭自动下载前置功能")
+        }*/
 
         logger.info("ConfigPlus成功启动")
     }
