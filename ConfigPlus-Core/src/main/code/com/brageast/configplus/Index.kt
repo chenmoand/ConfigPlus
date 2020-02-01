@@ -18,12 +18,6 @@ class Index : JavaPlugin() {
         // 获得Bean
         val config = ConfigFile().create(ConfigBean::class.java)
 
-        println(config)
-        /*if(config.isEnableDownloadLib.toBoolean()) {
-            // 下载前置
-        } else {
-            logger.info("以关闭自动下载前置功能")
-        }*/
 
         logger.info("ConfigPlus成功启动")
     }

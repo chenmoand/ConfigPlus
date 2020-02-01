@@ -70,10 +70,11 @@ fun getUsePluginClassName(): String {
  * 得到使用此方法得Plugin实例
  */
 fun getUseMethodPlugin(): Plugin {
-    val pluginClassName = getUsePluginClassName()
-    return Bukkit.getPluginManager().plugins.find {
-        it.javaClass.name == pluginClassName
-    } ?: throw ClassNotFoundException("can not find extends org.bukkit.plugin.java.JavaPlugin")
+    val pluginBeans = getPluginBeans()
+    return pluginBeans.find {
+        it.pluginDescription.main == getUsePluginClassName()
+    }?.plugin ?: throw ClassNotFoundException("can not find extends org.bukkit.plugin.java.JavaPlugin")
+
 }
 
 /**
