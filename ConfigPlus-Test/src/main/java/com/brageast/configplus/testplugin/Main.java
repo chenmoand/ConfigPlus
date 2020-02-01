@@ -3,6 +3,7 @@ package com.brageast.configplus.testplugin;
 import com.brageast.configplus.DownloadLib;
 import com.brageast.configplus.bean.Library;
 import com.brageast.configplus.util.ConfigFile;
+import com.brageast.configplus.util.Metrics;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class Main extends JavaPlugin {

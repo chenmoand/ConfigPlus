@@ -35,6 +35,8 @@ fun List<File>.filterIsJar(): List<File> {
     }
 }
 
+fun enableBStats(pluginId: Int) = Metrics(getUseMethodPlugin(), pluginId)
+
 
 fun getPluginBeans() = pluginJarFiles.run {
     this.map {
