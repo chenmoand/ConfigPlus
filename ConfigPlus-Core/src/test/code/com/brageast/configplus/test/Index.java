@@ -24,5 +24,12 @@ public class Index {
 
     }
 
+    @Test
+    public void Test3() {
+        for (StackTraceElement stackTraceElement : Thread.currentThread().getStackTrace()) {
+
+            System.out.println(stackTraceElement.getClassName());
+        }
+    }
 }
 

@@ -2,42 +2,54 @@ package com.brageast.configplus.bean;
 
 import com.google.common.collect.ImmutableList;
 import org.bukkit.permissions.Permission;
+import org.bukkit.permissions.PermissionDefault;
+import org.bukkit.plugin.PluginAwareness;
 import org.bukkit.plugin.PluginLoadOrder;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class PluginDescription {
-    private String name = null;
-    private String main = null;
-    private String version = null;
+    private String name;
+    private String version;
+    private String main;
+    private String author;
+    private List<String> authors;
+    private String description;
+    private String website;
+    private String prefix;
+    private PluginLoadOrder order = PluginLoadOrder.POSTWORLD;
     private List<String> depend = ImmutableList.of();
     private List<String> softdepend = ImmutableList.of();
     private List<String> loadbefore = ImmutableList.of();
-    private Map<String, Map<String, Object>> commands = null;
-    private String description = null;
-    private List<String> authors = null;
-    private String website = null;
-    private String prefix = null;
-    private PluginLoadOrder order = PluginLoadOrder.POSTWORLD;
-    private List<Permission> permissions = null;
+    private Map<String, Map<String, Object>> commands;
+    private List<Permission> permissions;
+    private PermissionDefault permissionDefault;
+    private Set<PluginAwareness> awareness;
+
+    private PlusBean plus;
 
     @Override
     public String toString() {
         return "PluginDescription{" +
                 "name='" + name + '\'' +
-                ", main='" + main + '\'' +
                 ", version='" + version + '\'' +
+                ", main='" + main + '\'' +
+                ", author='" + author + '\'' +
+                ", authors=" + authors +
+                ", description='" + description + '\'' +
+                ", website='" + website + '\'' +
+                ", prefix='" + prefix + '\'' +
+                ", order=" + order +
                 ", depend=" + depend +
                 ", softdepend=" + softdepend +
                 ", loadbefore=" + loadbefore +
                 ", commands=" + commands +
-                ", description='" + description + '\'' +
-                ", authors=" + authors +
-                ", website='" + website + '\'' +
-                ", prefix='" + prefix + '\'' +
-                ", order=" + order +
                 ", permissions=" + permissions +
+                ", permissionDefault=" + permissionDefault +
+                ", awareness=" + awareness +
+                ", plus=" + plus +
                 '}';
     }
 
@@ -49,6 +61,14 @@ public class PluginDescription {
         this.name = name;
     }
 
+    public String getVersion() {
+        return version;
+    }
+
+    public void setVersion(String version) {
+        this.version = version;
+    }
+
     public String getMain() {
         return main;
     }
@@ -57,12 +77,52 @@ public class PluginDescription {
         this.main = main;
     }
 
-    public String getVersion() {
-        return version;
+    public String getAuthor() {
+        return author;
     }
 
-    public void setVersion(String version) {
-        this.version = version;
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public List<String> getAuthors() {
+        return authors;
+    }
+
+    public void setAuthors(List<String> authors) {
+        this.authors = authors;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getWebsite() {
+        return website;
+    }
+
+    public void setWebsite(String website) {
+        this.website = website;
+    }
+
+    public String getPrefix() {
+        return prefix;
+    }
+
+    public void setPrefix(String prefix) {
+        this.prefix = prefix;
+    }
+
+    public PluginLoadOrder getOrder() {
+        return order;
+    }
+
+    public void setOrder(PluginLoadOrder order) {
+        this.order = order;
     }
 
     public List<String> getDepend() {
@@ -97,51 +157,35 @@ public class PluginDescription {
         this.commands = commands;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public List<String> getAuthors() {
-        return authors;
-    }
-
-    public void setAuthors(List<String> authors) {
-        this.authors = authors;
-    }
-
-    public String getWebsite() {
-        return website;
-    }
-
-    public void setWebsite(String website) {
-        this.website = website;
-    }
-
-    public String getPrefix() {
-        return prefix;
-    }
-
-    public void setPrefix(String prefix) {
-        this.prefix = prefix;
-    }
-
-    public PluginLoadOrder getOrder() {
-        return order;
-    }
-
-    public void setOrder(PluginLoadOrder order) {
-        this.order = order;
-    }
-
     public List<Permission> getPermissions() {
         return permissions;
     }
 
     public void setPermissions(List<Permission> permissions) {
         this.permissions = permissions;
+    }
+
+    public PermissionDefault getPermissionDefault() {
+        return permissionDefault;
+    }
+
+    public void setPermissionDefault(PermissionDefault permissionDefault) {
+        this.permissionDefault = permissionDefault;
+    }
+
+    public Set<PluginAwareness> getAwareness() {
+        return awareness;
+    }
+
+    public void setAwareness(Set<PluginAwareness> awareness) {
+        this.awareness = awareness;
+    }
+
+    public PlusBean getPlus() {
+        return plus;
+    }
+
+    public void setPlus(PlusBean plus) {
+        this.plus = plus;
     }
 }

@@ -1,10 +1,13 @@
 package com.brageast.configplus.bean;
 
-import lombok.Data;
-
-@Data
 public class ConfigBean {
     private String isEnableDownloadLib;
-    private Integer version;
 
+    public String getIsEnableDownloadLib() {
+        return isEnableDownloadLib;
+    }
+
+    public void setIsEnableDownloadLib(String isEnableDownloadLib) {
+        this.isEnableDownloadLib = isEnableDownloadLib;
+    }
 }

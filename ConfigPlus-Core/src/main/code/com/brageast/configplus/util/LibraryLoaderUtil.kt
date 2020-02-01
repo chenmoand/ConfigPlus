@@ -1,6 +1,7 @@
 package com.brageast.configplus.util
 
 import com.brageast.configplus.DownloadLib
+import com.brageast.configplus.util.PluginUtil.thisPlugin
 import java.net.URL
 import java.net.URLClassLoader
 

@@ -21,8 +21,8 @@ class ConfigFile {
      */
     @JvmOverloads
     fun <E : Any> read(beanClass: Class<E>, filename: String = "config", fileType: FileType = FileType.YAML): E {
-        val _filename = filename + fileType
-        val file = File(dataFolder, _filename)
+        val child = filename + fileType
+        val file = File(dataFolder, child)
         if (!file.exists()) {
             file.createNewFile()
         }
@@ -31,10 +31,10 @@ class ConfigFile {
 
     @JvmOverloads
     fun <E : Any> create(beanClass: Class<E>, filename: String = "config", fileType: FileType = FileType.YAML): E {
-        val _filename = filename + fileType
+        val child = filename + fileType
         val useMethodPluginFile = getUseMethodPluginFile()
-        val file = File(dataFolder, _filename)
-        val fileInput = useMethodPluginFile.getFileInput(_filename)
+        val file = File(dataFolder, child)
+        val fileInput = useMethodPluginFile.getFileInput(child)
         if (!file.exists()) {
             file.createNewFile()
             fileInput.copyTo(file.outputStream())

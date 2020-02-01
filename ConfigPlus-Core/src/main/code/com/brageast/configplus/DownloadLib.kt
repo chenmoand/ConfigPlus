@@ -3,6 +3,7 @@ package com.brageast.configplus
 import com.brageast.configplus.bean.Library
 import com.brageast.configplus.read.ReadJson
 import com.brageast.configplus.util.*
+import com.brageast.configplus.util.PluginUtil.dataFolder
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.Request
@@ -25,7 +26,6 @@ object DownloadLib {
         pluginJarFiles.mapNotNull {
             ScanFile.getPluginFile(it, "lib.json")
         }.forEach {input ->
-
             val groupBy = ReadJson.read(
                     input, ArrayLibrary::class.java
             ).filter {
