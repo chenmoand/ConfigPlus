@@ -21,8 +21,7 @@ class Index : JavaPlugin() {
         enableBStats(6406)
 
         // 获得Bean
-        val config = ConfigFile().create(ConfigBean::class.java)
-
+        val config = ConfigFile().create(beanClass = ConfigBean::class.java)
 
         logger.info("ConfigPlus成功启动")
     }

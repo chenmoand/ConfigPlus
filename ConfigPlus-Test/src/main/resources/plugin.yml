@@ -2,3 +2,7 @@ name: ConfigPlusTest
 main: com.brageast.configplus.testplugin.Main
 version: 1.0
 depend: [ConfigPlus]
+
+commands:
+  ho:
+    permission: hh.sad

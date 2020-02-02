@@ -7,6 +7,9 @@ import com.brageast.configplus.read.ReadYaml;
 import lombok.val;
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Index {
 
     @Test
@@ -31,5 +34,20 @@ public class Index {
             System.out.println(stackTraceElement.getClassName());
         }
     }
+
+    @Test
+    public void Test4() {
+        final PluginTest pluginTest = new PluginTest();
+        pluginTest.setName("java");
+
+        List<PluginTest> pluginTestList = new ArrayList<>();
+        pluginTestList.add(pluginTest);
+
+        pluginTest.setName("hello");
+
+        pluginTestList.forEach(System.out::println);
+
+    }
+
 }
 

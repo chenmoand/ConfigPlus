@@ -17,6 +17,7 @@ class ConfigFile {
         if (!dataFolder.exists()) {
             dataFolder.mkdirs()
         }
+        configFileManagement.putIfAbsent(plugin, this)
     }
 
     /**
@@ -65,6 +66,20 @@ class ConfigFile {
         val readConfig = fileType.readConfig
         readConfig.wirte(file.outputStream(), entity as Any)
         return readConfig.read(file.inputStream(), entity.javaClass) as E
+    }
+
+    companion object {
+
+        val configFileManagement = HashMap<Plugin, ConfigFile>()
+
+        /**
+         * 获得ConfigFile实例
+         */
+        @JvmOverloads
+        @JvmStatic
+        fun getConfigFile(plugin: Plugin = getUseMethodPlugin()): ConfigFile {
+            return configFileManagement[plugin] ?: throw NullPointerException("You must instantiate ConfigFile in the onEnable method of javaPlugin.")
+        }
     }
 
 }
