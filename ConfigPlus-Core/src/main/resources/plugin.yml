@@ -1,3 +1,8 @@
 name: ConfigPlus
 main: com.brageast.configplus.Index
 version: 1.0
+
+order: STARTUP
+
+plus:
+  BStatsId: 6406

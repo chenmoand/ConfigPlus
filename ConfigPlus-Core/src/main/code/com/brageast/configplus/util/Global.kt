@@ -21,23 +21,20 @@ val pluginJarFiles = ScanFile.getPluginFiles(PluginUtil.dataFolder.parentFile)
 var okHttpClient = OkHttpClient()
 
 fun <E : Any> Array<E>?.toListOnNotNull(): List<E> {
-    if (!this.isNullOrEmpty()) {
-        return filterNotNull()
-    }
-    return emptyList()
+    return if (!this.isNullOrEmpty()) filterNotNull() else emptyList()
 }
 
 fun List<File>.filterIsJar(): List<File> {
-    return this.filter {
-        it.isFile
-    }.filter {
+    return filter(File::isFile).filter {
         it.name.endsWith(".jar", true)
     }
 }
 
 fun enableBStats(pluginId: Int) = Metrics(getUseMethodPlugin(), pluginId)
 
-
+/**
+ * 推荐在服务器加载完成后在使用
+ */
 fun getPluginBeans() = pluginJarFiles.run {
     this.map {
         val description = ReadYaml.yamlbeans.read(it.getFileInput("plugin.yml"), PluginDescription::class.java)
@@ -73,8 +70,9 @@ fun getUsePluginClassName(): String {
  */
 fun getUseMethodPlugin(): Plugin {
     val pluginBeans = getPluginBeans()
+    val usePluginClassName = getUsePluginClassName()
     return pluginBeans.find {
-        it.pluginDescription.main == getUsePluginClassName()
+        it.pluginDescription.main == usePluginClassName
     }?.plugin ?: throw ClassNotFoundException("can not find extends org.bukkit.plugin.java.JavaPlugin")
 
 }
@@ -90,14 +88,20 @@ fun getUseMethodPluginFile(): JarFile = getUseMethodPluginPair().first
 fun getUseMethodDescription(): PluginDescription = getUseMethodPluginPair().second
 
 fun getUseMethodPluginPair(): Pair<JarFile, PluginDescription> {
-    return pluginJarFiles.mapNotNull {
-        it to it.getFileInput("plugin.yml")
-    }.map {
-        it.first to ReadYaml.yamlbeans.read(it.second, PluginDescription::class.java)
-    }.find {
-        it.second.main == getUsePluginClassName()
+    val usePluginClassName = getUsePluginClassName()
+    return getAllPluginPair().find {
+        it.second.main == usePluginClassName
     } ?: throw FileNotFoundException("can not find plugin")
 }
+
+fun getAllPluginPair(): List<Pair<JarFile, PluginDescription>> {
+    return pluginJarFiles.mapNotNull {
+        val fileInput = it.getFileInput("plugin.yml")
+        it to ReadYaml.yamlbeans.read(fileInput, PluginDescription::class.java)
+    }
+}
+
+fun getAllPluginDescription(): List<PluginDescription> = getAllPluginPair().map { it.second }
 
 fun JarFile.getFileInput(fileName: String) = getInputStream(getJarEntry(fileName))
         ?: throw FileNotFoundException("$name in $fileName does not exist")
