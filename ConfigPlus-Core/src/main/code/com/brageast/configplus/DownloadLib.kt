@@ -25,24 +25,20 @@ object DownloadLib {
         log.info("===========[检查Lib开始]==========")
         pluginJarFiles.mapNotNull {
             ScanFile.getPluginFile(it, "lib.json")
-        }.forEach {input ->
-            val groupBy = ReadJson.read(
-                    input, ArrayLibrary::class.java
-            ).filter {
-                !isHaveLib(it.artifactId + ".jar")
-            }.filter {
-                it.artifactId != null && it.groupId != null && it.version != null
-            }.groupBy {
-                it.toGroupBy()
-            }
-
-            val map = groupBy.values.map { it[0] }
-            map.forEach {
-                println("${it.artifactId} : ${it.toLink()}")
-                download(it, false)
-            }
+        }.flatMap {
+            ReadJson.read(it, ArrayLibrary::class.java).toList()
+        }.filter {
+            !isHaveLib(it.artifactId + ".jar")
+        }.filter {
+            it.artifactId != null && it.groupId != null && it.version != null
+        }.groupBy {
+            it.toGroupBy()
+        }.map {
+            it.value[0]
+        }.forEach {
+            println("${it.artifactId} : ${it.toLink()}")
+            download(it, false)
         }
-
         log.info("===========[检查Lib完成]==========")
     }
 
