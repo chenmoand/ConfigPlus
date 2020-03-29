@@ -21,7 +21,7 @@ object ReadYaml {
             return reader.read(beanClass) ?: throw IllegalAccessException("Can't load this inputStream")
         }
 
-        override fun wirte(outputStream: OutputStream, entity: Any) {
+        override fun write(outputStream: OutputStream, entity: Any) {
             val yamlWriter = YamlWriter(outputStream.bufferedWriter())
             yamlWriter.write(entity)
             yamlWriter.close()
@@ -49,7 +49,7 @@ object ReadYaml {
                     ?: throw IllegalAccessException("Can't load this inputStream")
         }
 
-        override fun wirte(outputStream: OutputStream, entity: Any) {
+        override fun write(outputStream: OutputStream, entity: Any) {
             ymal.dump(entity, outputStream.bufferedWriter())
         }
 

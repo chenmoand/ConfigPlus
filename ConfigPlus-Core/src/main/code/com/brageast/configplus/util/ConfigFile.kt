@@ -64,7 +64,7 @@ class ConfigFile {
         val child = filename + fileType
         val file = configMap[child] ?: throw FileNotFoundException("$child 文件没有从ConfigFile创建, 请您先创建在写入")
         val readConfig = fileType.readConfig
-        readConfig.wirte(file.outputStream(), entity as Any)
+        readConfig.write(file.outputStream(), entity as Any)
         return readConfig.read(file.inputStream(), entity.javaClass) as E
     }
 

@@ -6,5 +6,5 @@ import java.io.OutputStream
 interface ReadConfig {
     fun read(inputStream: InputStream): Map<String, Any>
     fun <E> read(inputStream: InputStream, beanClass: Class<E>): E
-    fun wirte(outputStream: OutputStream, entity: Any)
+    fun write(outputStream: OutputStream, entity: Any)
 }

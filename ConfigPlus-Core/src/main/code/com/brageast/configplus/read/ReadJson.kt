@@ -19,7 +19,7 @@ object ReadJson : ReadConfig {
                 ?: throw IllegalAccessException("Can't load this inputStream to beanClass")
     }
 
-    override fun wirte(outputStream: OutputStream, entity: Any) {
+    override fun write(outputStream: OutputStream, entity: Any) {
         val json = gson.toJson(entity)
         outputStream.write(json.toByteArray())
         outputStream.close()
